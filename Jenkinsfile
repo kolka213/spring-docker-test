@@ -28,21 +28,9 @@ pipeline {
             }
         }
 
-        stage("Dockerizing"){
-            agent {label 'docker'}
-            steps {
-                script {
-                    // Define Docker image name and tag
-                    def dockerImage = docker.build("pascalschwabe/spring-docker-test/spring-docker-test:${env.BUILD_ID}")
-
-                    // Login to Docker Hub
-                    sh "docker login -u ${env.DOCKER_HUB_USERNAME} -p ${env.DOCKER_HUB_PASSWORD}"
-
-                    // Push Docker image to Docker Hub
-                    dockerImage.push()
-                }
-            }
-
+        node {
+            def app = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_TAG}")
+            app.push()
         }
 
         stage('Archive Artifacts') {
