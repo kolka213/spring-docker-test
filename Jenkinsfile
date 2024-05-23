@@ -28,9 +28,18 @@ pipeline {
             }
         }
 
+        stage("Dockerizing"){
+            agent { dockerfile true }
+            dockerfile {
+                filename 'spring-docker-test:latest'
+                dir 'build'
+                label 'my-defined-label'
+            }
+        }
+
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: 'build/*.jar', fingerprint: true
             }
         }
     }
