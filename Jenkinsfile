@@ -28,9 +28,11 @@ pipeline {
             }
         }
 
-        node {
-            def app = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_TAG}")
-            app.push()
+        stage('Dockerhub') {
+            steps {
+                def app = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_TAG}")
+                app.push()
+            }
         }
 
         stage('Archive Artifacts') {
