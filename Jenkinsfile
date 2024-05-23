@@ -30,11 +30,14 @@ pipeline {
 
         stage("Dockerizing"){
             agent { dockerfile true }
-            dockerfile {
-                filename 'spring-docker-test:latest'
-                dir 'build'
-                label 'my-defined-label'
+            steps {
+                dockerfile {
+                    filename 'spring-docker-test:latest'
+                    dir 'build'
+                    label 'my-defined-label'
+                }
             }
+
         }
 
         stage('Archive Artifacts') {
