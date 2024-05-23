@@ -30,8 +30,10 @@ pipeline {
 
         stage('Dockerhub') {
             steps {
-                def app = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_TAG}")
-                app.push()
+                script {
+                    def app = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_TAG}")
+                    app.push()
+                }
             }
         }
 
