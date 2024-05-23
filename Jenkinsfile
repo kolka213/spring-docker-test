@@ -13,16 +13,16 @@ pipeline {
         stage('Cleanup') {
             steps {
                 // Cleans the local Maven repository
-                bat 'mvn dependency:resolve'
+                sh 'mvn dependency:resolve'
 
                 // Optionally clean the project first
-                bat 'mvn clean'
+                sh 'mvn clean'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'mvn package'
+                sh 'mvn package'
             }
         }
 
