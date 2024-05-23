@@ -1,6 +1,6 @@
 pipeline {
 
-    agent { docker }
+    agent any
 
     stages{
 
@@ -29,6 +29,7 @@ pipeline {
         }
 
         stage("Dockerizing"){
+            agent {docker}
             steps {
                 script {
                     // Define Docker image name and tag
