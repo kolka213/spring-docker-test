@@ -13,7 +13,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 // Cleans the local Maven repository
-                withMaven(maven: 'maven-3.9.6') {
+                withMaven(maven: 'Maven-3.9.6') {
                     sh 'mvn dependency:resolve'
                     sh 'mvn clean'
                 }
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                withMaven(maven: 'maven-3.9.6') {
+                withMaven(maven: 'Maven-3.9.6') {
                     sh 'mvn package'
                 }
             }
