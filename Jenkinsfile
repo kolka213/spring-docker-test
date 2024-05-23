@@ -29,7 +29,6 @@ pipeline {
         }
 
         stage("Dockerizing"){
-            agent { dockerfile true }
             steps {
                 dockerfile {
                     filename 'spring-docker-test:latest'
