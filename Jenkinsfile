@@ -36,12 +36,11 @@ pipeline {
             agent {
                 dockerfile {
                     registryUrl 'https://registry.hub.docker.com'
-                    registryCredentialsId 'dd14a04d-2cd3-401a-a237-b002b02b86b8'
-                    args '-v /tmp/.docker:/root/.docker'
+                    registryCredentialsId 'docker_cred'
                     }
             }
             steps {
-                withDockerRegistry(credentialsId: 'dd14a04d-2cd3-401a-a237-b002b02b86b8', toolName: 'docker', url: 'https://registry.hub.docker.com') {
+                withDockerRegistry(credentialsId: 'docker_cred', toolName: 'docker', url: 'https://registry.hub.docker.com') {
                     echo 'push image'
                 }
             }
