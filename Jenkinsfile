@@ -30,7 +30,7 @@ pipeline {
 
         stage('Dockerhub') {
             steps {
-                node {
+                script {
                     def customImage = docker.build("spring-docker-test:${env.BUILD_ID}")
                     customImage.push()
                 }
