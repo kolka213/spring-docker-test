@@ -34,7 +34,7 @@ pipeline {
                 dockerfile {
                     filename 'spring-docker-test'
                     dir 'build'
-                    label 'latest'
+                    label 'docker'
                 }
             }
             steps {
