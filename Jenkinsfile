@@ -42,9 +42,21 @@ pipeline {
             }
         }
 
-        stage('Docker build & push') {
+        stage('Docker login') {
             steps {
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+            }
+        }
+
+        stage('Docker build') {
+            steps {
+                sh 'docker build -t pascalschwabe/spring-docker-test:latest .'
+            }
+        }
+
+        stage('Docker push') {
+            steps {
+                sh 'docker push pascalschwabe/spring-docker-test:latest'
             }
         }
 
