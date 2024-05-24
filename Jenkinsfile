@@ -6,6 +6,8 @@ pipeline {
         DOCKER_CONFIG = '/tmp/.docker'
     }
 
+    stages{
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -51,3 +53,4 @@ pipeline {
             }
         }
     }
+}
