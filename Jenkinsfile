@@ -41,6 +41,7 @@ pipeline {
                 dockerfile {
                     registryUrl 'https://registry.hub.docker.com'
                     registryCredentialsId 'dd14a04d-2cd3-401a-a237-b002b02b86b8'
+                    args '-v /tmp:/tmp'
                     }
             }
             steps {
