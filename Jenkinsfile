@@ -29,10 +29,12 @@ pipeline {
         }
 
         stage('Dockerhub') {
-            steps {
-                script {
-                    def app = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_TAG}")
-                    app.push()
+            agent {
+                // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+                dockerfile {
+                    filename 'spring-docker-test'
+                    dir 'build'
+                    label 'latest'
                 }
             }
         }
