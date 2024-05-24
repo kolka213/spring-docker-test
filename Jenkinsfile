@@ -44,7 +44,9 @@ pipeline {
                     }
             }
             steps {
-                echo 'Build dockerfile'
+                withDockerRegistry(credentialsId: 'dd14a04d-2cd3-401a-a237-b002b02b86b8', toolName: 'docker', url: 'https://registry.hub.docker.com') {
+                    echo 'push image'
+                }
             }
         }
 
