@@ -29,12 +29,9 @@ pipeline {
         }
 
         stage('Dockerhub') {
-            agent {
-                // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-                dockerfile true
-            }
-            steps {
-                sh "echo running Dockerfile"
+            node {
+                def customImage = docker.build("spring-docker-test:${env.BUILD_ID}")
+                customImage.push()
             }
         }
 
