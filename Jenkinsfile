@@ -28,12 +28,20 @@ pipeline {
             }
         }
 
-        stage('Dockerhub') {
-            agent { dockerfile true }
+        stage('Docker build') {
             steps {
                 script {
-                    def customImage = docker.build("spring-docker-test:${env.BUILD_ID}")
-                    customImage.push()
+                    def customImage = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_ID}")
+                }
+            }
+        }
+
+        stage('Docker push') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dd14a04d-2cd3-401a-a237-b002b02b86b8') {
+                        customImage.push()
+                    }
                 }
             }
         }
