@@ -35,6 +35,7 @@ pipeline {
                     filename 'spring-docker-test'
                     dir 'build'
                     label 'docker'
+                    registryUrl 'https://hub.docker.com'
                 }
             }
             steps {
