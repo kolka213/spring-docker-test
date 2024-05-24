@@ -37,6 +37,9 @@ pipeline {
                     label 'latest'
                 }
             }
+            steps {
+                sh "echo running Dockerfile"
+            }
         }
 
         stage('Archive Artifacts') {
