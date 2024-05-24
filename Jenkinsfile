@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         DOCKER_CONFIG = '/tmp/.docker'
+        DOCKERHUB_CREDENTIALS = credentials('docker_cred')
     }
 
     stages{
@@ -33,16 +34,8 @@ pipeline {
         }
 
         stage('Docker build & push') {
-            agent {
-                dockerfile {
-                    registryUrl 'https://registry.hub.docker.com'
-                    registryCredentialsId 'docker_cred'
-                    }
-            }
             steps {
-                withDockerRegistry(credentialsId: 'docker_cred', toolName: 'docker', url: 'https://registry.hub.docker.com') {
-                    echo 'push image'
-                }
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login --username $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
 
