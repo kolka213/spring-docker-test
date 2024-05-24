@@ -6,16 +6,6 @@ pipeline {
         DOCKER_CONFIG = '/tmp/.docker'
     }
 
-    stages{
-        stage('Initialize') {
-            steps {
-                script {
-                    def dockerHome = tool 'docker'
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
-                }
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -45,6 +35,7 @@ pipeline {
                 dockerfile {
                     registryUrl 'https://registry.hub.docker.com'
                     registryCredentialsId 'dd14a04d-2cd3-401a-a237-b002b02b86b8'
+                    args '-v /tmp/.docker:/root/.docker'
                     }
             }
             steps {
