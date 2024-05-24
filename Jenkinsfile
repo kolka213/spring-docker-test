@@ -37,13 +37,14 @@ pipeline {
         }
 
         stage('Docker build & push') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dd14a04d-2cd3-401a-a237-b002b02b86b8') {
-                        def customImage = docker.build("pascalschwabe/spring-docker-test:${env.BUILD_ID}")
-                        customImage.push()
+            agent {
+                dockerfile {
+                    registryUrl 'https://registry.hub.docker.com'
+                    registryCredentialsId 'dd14a04d-2cd3-401a-a237-b002b02b86b8'
                     }
-                }
+            }
+            steps {
+
             }
         }
 
