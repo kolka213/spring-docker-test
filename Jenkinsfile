@@ -5,7 +5,7 @@ pipeline {
     environment {
         DOCKER_CONFIG = '/tmp/.docker'
         DOCKERHUB_CREDENTIALS = credentials('docker_cred')
-        DOCKER_OPTS="--insecure-registry=192.168.120.75:5000"
+        DOCKER_OPTS="--insecure-registry=localhost:5000"
     }
 
     stages{
@@ -19,11 +19,6 @@ pipeline {
             }
         }
 
-        stage('Configure Docker Daemon'){
-            steps {
-                sh "dockerd ${DOCKER_OPTS} &"
-            }
-        }
 
         stage('Checkout') {
             steps {
@@ -51,19 +46,19 @@ pipeline {
 
         stage('Docker login') {
             steps {
-                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW 192.168.120.75:5000'
+                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW localhost:5000'
             }
         }
 
         stage('Docker build') {
             steps {
-                sh 'docker build -t 192.168.120.75:5000/spring-docker-test:latest .'
+                sh 'docker build -t localhost:5000/spring-docker-test:latest .'
             }
         }
 
         stage('Docker push') {
             steps {
-                sh 'docker push 192.168.120.75:5000/spring-docker-test:latest'
+                sh 'docker push localhost:5000/spring-docker-test:latest'
             }
         }
 
