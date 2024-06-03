@@ -20,6 +20,12 @@ pipeline {
             }
         }
 
+        stage('Configure Docker Daemon'){
+            steps {
+                sh "dockerd ${DOCKER_OPTS} ${DOCKER_TLS} &"
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
