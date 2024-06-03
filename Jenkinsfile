@@ -6,6 +6,7 @@ pipeline {
         DOCKER_CONFIG = '/tmp/.docker'
         DOCKERHUB_CREDENTIALS = credentials('docker_cred')
         DOCKER_OPTS="--insecure-registry=192.168.120.75:5000"
+        DOCKER_TLS=""
     }
 
     stages{
