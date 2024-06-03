@@ -50,13 +50,13 @@ pipeline {
 
         stage('Docker build') {
             steps {
-                sh 'docker build -t pascalschwabe/spring-docker-test:latest .'
+                sh 'docker build -t 192.168.120.75:5000/spring-docker-test:latest .'
             }
         }
 
         stage('Docker push') {
             steps {
-                sh 'docker push pascalschwabe/spring-docker-test:latest'
+                sh 'docker push 192.168.120.75:5000/spring-docker-test:latest'
             }
         }
 
