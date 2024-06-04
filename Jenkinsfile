@@ -45,7 +45,7 @@ pipeline {
 
         stage('Docker login') {
             steps {
-                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW http://192.168.120.69:5000'
+                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW http://192.168.120.69:5000/v2'
             }
         }
 
